@@ -32,7 +32,7 @@ public class DateTimeUtils {
 
 		SimpleDateFormat formatter = new SimpleDateFormat(formatPattern);
 
-		return formatter.format(new Date());
+		return formatter.format(date);
 	}
 
 	public static String formateLocalDateTime(LocalDateTime localDateTime, String formatPattern) {
