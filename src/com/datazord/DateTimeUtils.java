@@ -26,6 +26,10 @@ public class DateTimeUtils {
 		return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
 	}
 
+	public static Date convertLocalDateTimeToDate(LocalDateTime localDateTime) {
+		return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+	}
+
 	public static String formateDate(Date date, String formatPattern) {
 		if (StringUtils.isBlank(formatPattern))
 			return date.toString();
