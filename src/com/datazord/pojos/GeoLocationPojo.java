@@ -7,10 +7,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class GoogleFirebasePojo {
+public class GeoLocationPojo {
 
-	private String uid;
-	private String name;
-	private String email;
-	private String picutre;
+	private String countryName;
+	private String cityName;
+	private String postalCode;
+	private String state;
+
 }
