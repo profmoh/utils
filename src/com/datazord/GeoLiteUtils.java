@@ -11,9 +11,13 @@ import com.maxmind.geoip2.model.CityResponse;
 
 public class GeoLiteUtils {
 
+	private static String BASE_PATH = System.getProperty("user.dir") + File.separator;
+
 	public static GeoLocationPojo getLocation(String ipAddress) {
 
-		File file = new File("D:\\GeoLite2-City.mmdb");
+		System.out.println(BASE_PATH);
+
+		File file = new File(BASE_PATH + "GeoLite2-City.mmdb");
 
 		return getLocation(ipAddress, file);
 	}
