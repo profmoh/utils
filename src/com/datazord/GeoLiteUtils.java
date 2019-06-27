@@ -17,29 +17,29 @@ public class GeoLiteUtils {
 
 		System.out.println(BASE_PATH);
 
-		File file = new File(BASE_PATH + "GeoLite2-City.mmdb");
-
-		return getLocation(ipAddress, file);
-	}
-
-	private static GeoLocationPojo getLocation(String ip, File database) {
-
 		try {
-			DatabaseReader dbReader = new DatabaseReader.Builder(database).build();
+			File file = new File(BASE_PATH + "GeoLite2-City.mmdb");
 
-			InetAddress ipAddress = InetAddress.getByName(ip);
-			CityResponse response = dbReader.city(ipAddress);
-
-			String countryName = response.getCountry().getName();
-			String cityName = response.getCity().getName();
-			String postalCode = response.getPostal().getCode();
-			String state = response.getLeastSpecificSubdivision().getName();
-
-			return new GeoLocationPojo(countryName, cityName, postalCode, state);
-		} catch (IOException | GeoIp2Exception e) {
+			return getLocation(ipAddress, file);
+		} catch (IOException | GeoIp2Exception | NullPointerException e) {
 			e.printStackTrace();
 
 			return new GeoLocationPojo("UNDEFINED", "UNDEFINED", "UNDEFINED", "UNDEFINED");
 		}
+	}
+
+	private static GeoLocationPojo getLocation(String ip, File database) throws IOException, GeoIp2Exception {
+
+		DatabaseReader dbReader = new DatabaseReader.Builder(database).build();
+
+		InetAddress ipAddress = InetAddress.getByName(ip);
+		CityResponse response = dbReader.city(ipAddress);
+
+		String countryName = response.getCountry().getName();
+		String cityName = response.getCity().getName();
+		String postalCode = response.getPostal().getCode();
+		String state = response.getLeastSpecificSubdivision().getName();
+
+		return new GeoLocationPojo(countryName, cityName, postalCode, state);
 	}
 }
