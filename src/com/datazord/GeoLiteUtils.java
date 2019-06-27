@@ -3,6 +3,7 @@ package com.datazord;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 import com.datazord.pojos.GeoLocationPojo;
 import com.maxmind.geoip2.DatabaseReader;
@@ -21,14 +22,14 @@ public class GeoLiteUtils {
 			File file = new File(BASE_PATH + "GeoLite2-City.mmdb");
 
 			return getLocation(ipAddress, file);
-		} catch (IOException | GeoIp2Exception | NullPointerException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 
 			return new GeoLocationPojo("UNDEFINED", "UNDEFINED", "UNDEFINED", "UNDEFINED");
 		}
 	}
 
-	private static GeoLocationPojo getLocation(String ip, File database) throws IOException, GeoIp2Exception {
+	private static GeoLocationPojo getLocation(String ip, File database) throws IOException, GeoIp2Exception, UnknownHostException {
 
 		DatabaseReader dbReader = new DatabaseReader.Builder(database).build();
 
