@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class GeoLocationPojo {
 
+	private String countryCode;
 	private String countryName;
 	private String cityName;
 	private String postalCode;

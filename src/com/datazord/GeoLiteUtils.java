@@ -25,7 +25,7 @@ public class GeoLiteUtils {
 		} catch (Exception e) {
 			e.printStackTrace();
 
-			return new GeoLocationPojo("UNDEFINED", "UNDEFINED", "UNDEFINED", "UNDEFINED");
+			return new GeoLocationPojo("UNDEFINED", "UNDEFINED", "UNDEFINED", "UNDEFINED", "UNDEFINED");
 		}
 	}
 
@@ -36,11 +36,12 @@ public class GeoLiteUtils {
 		InetAddress ipAddress = InetAddress.getByName(ip);
 		CityResponse response = dbReader.city(ipAddress);
 
+		String countryCode = response.getCountry().getIsoCode();
 		String countryName = response.getCountry().getName();
 		String cityName = response.getCity().getName();
 		String postalCode = response.getPostal().getCode();
 		String state = response.getLeastSpecificSubdivision().getName();
 
-		return new GeoLocationPojo(countryName, cityName, postalCode, state);
+		return new GeoLocationPojo(countryCode, countryName, cityName, postalCode, state);
 	}
 }
