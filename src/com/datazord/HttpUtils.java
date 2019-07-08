@@ -36,7 +36,7 @@ public class HttpUtils {
 			break;
 		}
 
-		if(remoteAddr.contains("."))
+		if(remoteAddr != null && remoteAddr.contains("."))
 			remoteAddr = remoteAddr.split("\\s*,\\s*")[0];
 
 		return remoteAddr;
