@@ -31,12 +31,13 @@ public class GeoLiteUtils {
 
 	private static GeoLocationPojo getLocation(String ip, File database) throws IOException, GeoIp2Exception, UnknownHostException {
 
-		if(ip != null && ip.equals("127.0.0.1"))
-			return new GeoLocationPojo("TR", "Turkey", "Istanbul", "34040", "UNDEFINED");
-
 		DatabaseReader dbReader = new DatabaseReader.Builder(database).build();
 
 		InetAddress ipAddress = InetAddress.getByName(ip);
+
+		if(ipAddress != null && ipAddress.getHostName().contains("localhost"))
+			return new GeoLocationPojo("TR", "Turkey", "Istanbul", "34040", "UNDEFINED");
+
 		CityResponse response = dbReader.city(ipAddress);
 
 		String countryCode = response.getCountry().getIsoCode();
