@@ -14,5 +14,4 @@ public class GeoLocationPojo {
 	private String cityName;
 	private String postalCode;
 	private String state;
-
 }
