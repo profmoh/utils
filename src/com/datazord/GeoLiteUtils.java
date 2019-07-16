@@ -14,6 +14,8 @@ public class GeoLiteUtils {
 
 	private static String BASE_PATH = System.getProperty("user.dir") + File.separator;
 
+	public static String defaultValue = "UNDEFINED";
+
 	public static GeoLocationPojo getLocation(String ipAddress) {
 
 		System.out.println(BASE_PATH);
@@ -25,7 +27,7 @@ public class GeoLiteUtils {
 		} catch (Exception e) {
 			e.printStackTrace();
 
-			return new GeoLocationPojo("UNDEFINED", "UNDEFINED", "UNDEFINED", "UNDEFINED", "UNDEFINED");
+			return new GeoLocationPojo(defaultValue, defaultValue, defaultValue, defaultValue, defaultValue);
 		}
 	}
 
@@ -36,7 +38,7 @@ public class GeoLiteUtils {
 		InetAddress ipAddress = InetAddress.getByName(ip);
 
 		if(ipAddress != null && ipAddress.getHostName().contains("localhost"))
-			return new GeoLocationPojo("TR", "Turkey", "Istanbul", "34040", "UNDEFINED");
+			return new GeoLocationPojo("TR", "Turkey", "Istanbul", "34040", defaultValue);
 
 		CityResponse response = dbReader.city(ipAddress);
 
